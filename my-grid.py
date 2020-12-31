@@ -53,9 +53,9 @@ def printMaze(maze, path=""):
     for j, row in enumerate(maze):
         for i, col in enumerate(row):
             if (j, i) in pos:
-                print("+ ", end="")
+                print("+ "),
             else:
-                print(col + " ", end="")
+                print(col + " "),
         print()
         
 
