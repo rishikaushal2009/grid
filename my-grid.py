@@ -15,26 +15,31 @@ def createMaze():
 
 def createMaze2():
     maze = []
-    maze.append(["#","#", "#", "#", "#", "O", "#", "#", "#"])
-    maze.append(["#"," ", " ", " ", " ", " ", " ", " ", "#"])
+    maze.append(["#","#", "#", "#", "#", "#", "#", "#", "#"])
+    maze.append(["#"," ", "O", " ", "#", " ", " ", " ", "#"])
     maze.append(["#"," ", "#", "#", " ", "#", "#", " ", "#"])
     maze.append(["#"," ", "#", " ", " ", " ", "#", " ", "#"])
     maze.append(["#"," ", "#", " ", "#", " ", "#", " ", "#"])
     maze.append(["#"," ", "#", " ", "#", " ", "#", " ", "#"])
     maze.append(["#"," ", "#", " ", "#", " ", "#", "#", "#"])
-    maze.append(["#"," ", " ", " ", " ", " ", " ", " ", "#"])
-    maze.append(["#","#", "#", "#", "#", "#", "#", "X", "#"])
+    maze.append(["#"," ", " ", " ", " ", " ", " ", "X", "#"])
+    maze.append(["#","#", "#", "#", "#", "#", "#", "#", "#"])
 
     return maze
 
 
 def printMaze(maze, path=""):
-    for x, pos in enumerate(maze[0]):
+    for j, row in enumerate(maze):
+     for x, pos in enumerate(maze[j]):
+    #for j, row in enumerate(maze):
+    #    for i, col in enumerate(row):
+    #     if maze[j][i] == "O":
         if pos == "O":
-            start = x
+             start = x
+             j1 = j
 
     i = start
-    j = 0
+    j = j1
     pos = set()
     for move in path:
         if move == "L":
@@ -48,7 +53,8 @@ def printMaze(maze, path=""):
 
         elif move == "D":
             j += 1
-        pos.add((j, i))
+        if maze[j][i] != "X":   
+           pos.add((j, i))
     
     for j, row in enumerate(maze):
         for i, col in enumerate(row):
@@ -61,12 +67,16 @@ def printMaze(maze, path=""):
 
 
 def valid(maze, moves):
-    for x, pos in enumerate(maze[0]):
-        if pos == "O":
-            start = x
+    #for x, pos in enumerate(maze[0]):
+    for j, row in enumerate(maze):
+        for i, col in enumerate(row):
+         if maze[j][i] == "O":
+    #    if pos == "O":
+            start = i
+            j1 = j
 
     i = start
-    j = 0
+    j = j1
     for move in moves:
         if move == "L":
             i -= 1
@@ -89,12 +99,16 @@ def valid(maze, moves):
 
 
 def findEnd(maze, moves):
-    for x, pos in enumerate(maze[0]):
-        if pos == "O":
-            start = x
+    #for x, pos in enumerate(maze[0]):
+    for j, row in enumerate(maze):
+        for i, col in enumerate(maze[j]):
+         if maze[j][i] == "O":
+    #    if pos == "O":
+            start = i
+            j1 = j
 
     i = start
-    j = 0
+    j = j1
     for move in moves:
         if move == "L":
             i -= 1
