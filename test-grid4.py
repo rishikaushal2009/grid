@@ -120,6 +120,8 @@ def printGRID(grid, path=""):
     q=list((pos))
     q.append(e)
     q.insert(0,s)
+    const obj = new Map(q);
+    print (obj.get('2'))
     for t in q :
         d = (t[1],t[0])
         pk.append(d)
