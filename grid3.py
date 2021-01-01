@@ -13,7 +13,7 @@ def grid1():
 
     return grid
 '''
-def grid2():
+def grid1():
     grid = []
     grid.append(["#","#", "#", "#", "#", "#", "#", "#", "#"])
     grid.append(["#"," ", "#", " ", "#", " ", " ", " ", "#"])
@@ -27,13 +27,56 @@ def grid2():
 
     return grid
 
+def grid3():
+    grid = []
+    grid.append(["#"," ","#","#"," "])
+    grid.append([" ","#"," "," "," "])                
+    grid.append([" ","#"," ","#"," "])                
+    grid.append([" "," "," ","#"," "])                   
+    grid.append([" "," "," ","#","#"]) 
+    
+    return grid
+
+
+
+#print("please provide coordinates of start & end in grid")
+
+class node:
+    def __init__(self, a, b):
+        #self.x = input("x : ")
+        self.x=a
+        #self.y = input("y : ")
+        self.y=b
+
+#print("starting node :-")
+start_node = node(0,0)
+#print("ending node: - ")
+end_node = node(4,4)
+
+'''
+start_node.x=1
+start_node.y=2
+end_node.x=7
+end_node.y=7
+'''
+
+def print_grid(grid):
+    for j, row in enumerate(grid):
+        for i, col in enumerate(row):
+            print (grid[j][i]),
+        print("")
+    print("\n")
+
+
 
 def printGRID(grid, path=""):
+    start = 0 
+    j1 = 0
     for j, row in enumerate(grid):
-     for x, pos in enumerate(grid[j]):   
-        if pos == "S":
-             start = x
-             j1 = j
+        for x, pos in enumerate(grid[j]):   
+            if pos == "S":
+                start = x
+                j1 = j
 
     i = start
     j = j1
@@ -51,7 +94,7 @@ def printGRID(grid, path=""):
         elif move == "D":
             j += 1
         if grid[j][i] != "E":   
-           pos.add((j, i))
+            pos.add((j, i))
     
     for j, row in enumerate(grid):
         for i, col in enumerate(row):
@@ -66,12 +109,13 @@ def printGRID(grid, path=""):
 
 
 def valid(grid, moves):
-    
+    start = 0 
+    j1 = 0
     for j, row in enumerate(grid):
         for i, col in enumerate(row):
-         if grid[j][i] == "S":
-            start = i
-            j1 = j
+            if grid[j][i] == "S":
+                start = i
+                j1 = j
 
     i = start
     j = j1
@@ -96,13 +140,14 @@ def valid(grid, moves):
     return True
 
 
-def find_shortest_path(grid, moves, start_node, end_node):
-    
+def find_path(grid, moves, start_node, end_node):
+    start = 0 
+    j1 = 0
     for j, row in enumerate(grid):
         for i, col in enumerate(grid[j]):
-         if grid[j][i] == "S":    
-            start = i
-            j1 = j
+            if grid[j][i] == "S":    
+                start = i
+                j1 = j
 
     i = start
     j = j1
@@ -127,47 +172,23 @@ def find_shortest_path(grid, moves, start_node, end_node):
     return False
 
 
-nums = queue.Queue()
-nums.put("")
-add = ""
-grid  = grid2()
-
-print("please provide coordinates of start & end in grid")
-
-class node:
-    def __init__(self, a, b):
-        #self.x = input("x : ")
-        self.x=a
-        #self.y = input("y : ")
-        self.y=b
-
-print("starting node :-")
-start_node = node(1,2)
-print("ending node: - ")
-end_node = node(7,7)
-'''
-start_node.x=1
-start_node.y=2
-end_node.x=7
-end_node.y=7
-'''
-
-
-def print_grid(grid):
-    for j, row in enumerate(grid):
-        for i, col in enumerate(row):
-            print (grid[j][i]),
-        print("")
-    print("\n")
+grid  = grid3()
 
 grid[start_node.x][start_node.y]="S"
 grid[end_node.x][end_node.y]="E"
 
-print_grid(grid)
+#print_grid(grid)
 
-while not find_shortest_path(grid, add, start_node, end_node): 
-    add = nums.get()
-    for j in ["L", "R", "U", "D"]:
-        put = add + j
-        if valid(grid, put):
-            nums.put(put)
+def find_shortest_path(grid, start_node, end_node ):
+    nums = queue.Queue()
+    nums.put("")
+    add = ""
+    while not find_path(grid, add, start_node, end_node): 
+        add = nums.get()
+        for j in ["L", "R", "U", "D"]:
+            put = add + j
+            if valid(grid, put):
+                nums.put(put)
+
+
+find_shortest_path(grid, start_node, end_node)
