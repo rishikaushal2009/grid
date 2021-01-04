@@ -17,8 +17,8 @@ from collections import deque
 
 
 def find_path_bfs(maze):
-    import ipdb; ipdb.set_trace()
-    a = []
+    #import ipdb; ipdb.set_trace()
+    p = []
     parent ={}
     start, goal = (0, 0), (len(maze) - 1, len(maze[0]) - 1)
     queue = deque([("", start)])
@@ -33,18 +33,23 @@ def find_path_bfs(maze):
                 a.append(j)    #for k in j :
             print([t for t in (set(tuple(i) for j,i in queue))] )
             '''
-            p=[]
-            while current is not None :
+            print(current)
+            print(parent)
+            while current is not (0,0) :
                 p.append(current)
-                current = parent[current]
+                if parent[current] not in p :
+                   current = parent[current]
+                   print(current) ,
             print(p.reverse())    
             return path
         if current in visited:
             continue
         visited.add(current)
-        
+        l.append(current)
         for direction, neighbour in graph[current]:
-            parent[neighbour]=current
+            #if current not in visited:
+            #l.append(current)
+            parent[neighbour]=l
             queue.append((path + direction, neighbour))
     return "NO WAY!"
 
@@ -121,12 +126,12 @@ MAZE = [
      
 ]
 
-def find_shortest_path(grid4, grid4_start, grid4_target):
-    print(maze2graph(MAZE))
-    print(find_path_bfs(MAZE))
-    '''
+#def find_shortest_path(grid4, grid4_start, grid4_target):
+print(maze2graph(MAZE))
+print(find_path_bfs(MAZE))
+'''
     a,c = find_path_bfs(MAZE)
     print(a)
     print(c)
-    '''
+'''
     
