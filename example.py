@@ -1,31 +1,5 @@
 import queue
 
-
-def printGRID(grid4, grid4_start, grid4_target ,  path=""):
-    start = 0
-    j1 = 0
-    for j, row in enumerate(grid4):
-        for x, pos in enumerate(grid4[j]):
-            if grid4[j][x] == grid4_start :
-                start = x
-                j1 = j
-    i = start
-    j = j1
-    pos = set()
-    for move in path:
-        if move == "L":
-            i -= 1
-        elif move == "R":
-             i += 1
-        elif move == "U":
-             j -= 1
-        elif move == "D":
-             j += 1
-        if grid4[j][i] != grid4_target:
-             pos.add((j, i))
-
-
-
 def valid(grid4, moves, grid4_start, grid4_target):
     start = 0
     j1 = 0
@@ -78,9 +52,6 @@ def find_path(grid4, moves, grid4_start, grid4_target):
 
         if grid4[j][i] == grid4_target :
             res = []
-            print("GotPath: " + moves)
-            printGRID(grid4, grid4_start, grid4_target,  moves)
-            #node = deque([start_node]).popleft()
             x = grid4_start.position.x
             y = grid4_start.position.y
             res.append(grid4[y][x])
@@ -121,3 +92,12 @@ def find_shortest_path(grid4, grid4_start, grid4_target):
                 if valid(grid4, put, grid4_start, grid4_target):
                     nums.put(put)
     return res
+            
+            
+            
+
+
+
+
+
+
